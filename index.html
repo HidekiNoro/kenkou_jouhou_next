@@ -4,12 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康情報NEXT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            color: #0078D7;
+        }
+        .info {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #0078D7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #005A9E;
+        }
+    </style>
 </head>
 <body>
     <h1>健康情報NEXTへようこそ</h1>
     <p>このプロジェクトでは、健康に関する情報を整理して共有します。</p>
+
+    <div class="info">
+        <h2>健康情報</h2>
+        <ul>
+            <li><strong>タイトル:</strong> サンプルタイトル1</li>
+            <li><strong>文献出所:</strong> サンプル文献1</li>
+            <li><strong>内容:</strong> これはサンプルの内容です。</li>
+        </ul>
+        <ul>
+            <li><strong>タイトル:</strong> サンプルタイトル2</li>
+            <li><strong>文献出所:</strong> サンプル文献2</li>
+            <li><strong>内容:</strong> これは別のサンプルの内容です。</li>
+        </ul>
+    </div>
+
+    <button onclick="addInfo()">健康情報を追加</button>
+
+    <script>
+        function addInfo() {
+            alert("追加ボタンが押されました。新しい健康情報をここに追加する機能を開発できます。");
+        }
+    </script>
 </body>
 </html>
+
 
 
 
