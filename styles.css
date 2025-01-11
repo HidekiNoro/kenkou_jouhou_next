@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #0078D7;
+}
+
+.info {
+    margin: 20px auto;
+    width: 80%;
+    border: 2px solid #0078D7;
+    padding: 10px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+input, textarea {
+    width: 80%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+    overflow-y: scroll;
+}
+
+button {
+    background-color: #0078D7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #005A9E;
+}
+
+.health-item {
+    border: 2px solid #0078D7;
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+}
