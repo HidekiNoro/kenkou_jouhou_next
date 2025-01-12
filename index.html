@@ -5,24 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康情報NEXT</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <h1>健康情報NEXTへようこそ</h1>
     <p>このプロジェクトでは、健康に関する情報を整理して共有します。</p>
 
     <div id="healthInfo" class="info">
-        <h2>健康情報</h2>
-        <!-- 文献情報のサンプル -->
-        <div class="entry">
-            <div>
-                <ul>
-                    <li><strong>タイトル:</strong> サンプルタイトル1</li>
-                    <li><strong>文献出所:</strong> サンプル文献1</li>
-                    <li><strong>内容:</strong> これはサンプルの内容です。</li>
-                </ul>
-            </div>
-            <button class="delete" onclick="deleteEntry(this)">削除</button>
-        </div>
+        <!-- 動的に文献データがここに表示されます -->
     </div>
 
     <div class="form-group">
@@ -38,9 +28,8 @@
         <textarea id="content" placeholder="内容を入力してください"></textarea>
     </div>
 
-    <button onclick="addInfo()">健康情報を追加</button>
-    <button class="delete-all" onclick="deleteAll()">全体削除</button>
-
-    <script src="scripts.js" defer></script>
+    <button onclick="addInfo()">文献を追加</button>
+    <button onclick="clearAll()" id="clearButton">全て削除</button>
 </body>
 </html>
+
