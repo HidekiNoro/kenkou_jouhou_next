@@ -21,10 +21,10 @@ function addInfo() {
     `;
     healthInfoDiv.prepend(newInfo);
 
-    // データを保存
+    // 保存
     saveData();
 
-    // 入力欄をクリア
+    // 入力欄リセット
     document.getElementById('title').value = '';
     document.getElementById('source').value = '';
     document.getElementById('content').value = '';
@@ -85,4 +85,5 @@ function loadData() {
 }
 
 window.onload = loadData;
+
 
