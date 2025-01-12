@@ -1,7 +1,7 @@
 function addInfo() {
-    const title = document.getElementById('title').value;
-    const source = document.getElementById('source').value;
-    const content = document.getElementById('content').value;
+    const title = document.getElementById('title').value.trim();
+    const source = document.getElementById('source').value.trim();
+    const content = document.getElementById('content').value.trim();
 
     if (!title || !source || !content) {
         alert("全ての項目を入力してください。");
@@ -21,8 +21,10 @@ function addInfo() {
     `;
     healthInfoDiv.prepend(newInfo);
 
+    // データを保存
     saveData();
 
+    // 入力欄をクリア
     document.getElementById('title').value = '';
     document.getElementById('source').value = '';
     document.getElementById('content').value = '';
@@ -53,9 +55,9 @@ function saveData() {
     const items = document.querySelectorAll('.health-info-item');
     const data = [];
     items.forEach(item => {
-        const title = item.querySelector('.title').textContent;
-        const source = item.querySelector('.source').textContent;
-        const content = item.querySelector('.content').textContent;
+        const title = item.querySelector('.title').textContent.replace('タイトル:', '').trim();
+        const source = item.querySelector('.source').textContent.replace('文献出所:', '').trim();
+        const content = item.querySelector('.content').textContent.replace('内容:', '').trim();
         data.push({ title, source, content });
     });
     localStorage.setItem('healthData', JSON.stringify(data));
@@ -83,3 +85,4 @@ function loadData() {
 }
 
 window.onload = loadData;
+
