@@ -1,43 +1,65 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     margin: 20px;
     padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #0078D7;
 }
 
 .info {
-    margin-top: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 10px;
     text-align: left;
+    width: 50%;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    height: 80px;
+    resize: none;
+    overflow-y: auto;
 }
 
 .health-info-item {
     border: 1px solid #ccc;
+    border-radius: 5px;
     padding: 10px;
-    margin: 10px 0;
-    position: relative;
+    margin-bottom: 10px;
+    width: 60%;
+    text-align: left;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.delete-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-#clearButton {
-    margin-top: 20px;
+button {
     background-color: #0078D7;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 10px;
 }
 
-#clearButton:hover {
+button:hover {
     background-color: #005A9E;
+}
+
+.delete-button {
+    float: right;
+    background-color: #d9534f;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
 }
