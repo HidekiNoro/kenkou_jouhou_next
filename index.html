@@ -12,6 +12,17 @@
 
     <div id="healthInfo" class="info">
         <h2>健康情報</h2>
+        <!-- 文献情報のサンプル -->
+        <div class="entry">
+            <div>
+                <ul>
+                    <li><strong>タイトル:</strong> サンプルタイトル1</li>
+                    <li><strong>文献出所:</strong> サンプル文献1</li>
+                    <li><strong>内容:</strong> これはサンプルの内容です。</li>
+                </ul>
+            </div>
+            <button class="delete" onclick="deleteEntry(this)">削除</button>
+        </div>
     </div>
 
     <div class="form-group">
@@ -28,7 +39,7 @@
     </div>
 
     <button onclick="addInfo()">健康情報を追加</button>
-    <button onclick="clearAllData()">すべての文献情報を削除</button>
+    <button class="delete-all" onclick="deleteAll()">全体削除</button>
 
     <script src="scripts.js" defer></script>
 </body>
