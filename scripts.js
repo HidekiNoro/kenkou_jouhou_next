@@ -1,3 +1,33 @@
+function addInfo() {
+    const title = document.getElementById('title').value;
+    const source = document.getElementById('source').value;
+    const content = document.getElementById('content').value;
+
+    if (!title || !source || !content) {
+        alert("全ての項目を入力してください。");
+        return;
+    }
+
+    const healthInfoDiv = document.getElementById('healthInfo');
+    const newInfo = document.createElement('div');
+    newInfo.className = 'health-info-item';
+    newInfo.innerHTML = `
+        <ul>
+            <li><strong class="title">タイトル:</strong> ${title}</li>
+            <li><strong class="source">文献出所:</strong> ${source}</li>
+            <li><strong class="content">内容:</strong> ${content}</li>
+        </ul>
+        <button onclick="deleteItem(event)" class="delete-button">削除</button>
+    `;
+    healthInfoDiv.prepend(newInfo);
+
+    saveData();
+
+    document.getElementById('title').value = '';
+    document.getElementById('source').value = '';
+    document.getElementById('content').value = '';
+}
+
 function deleteItem(event) {
     const password = prompt("削除するにはパスワードを入力してください:");
     if (password !== "1234") {
@@ -6,8 +36,6 @@ function deleteItem(event) {
     }
     const item = event.target.closest('.health-info-item');
     item.remove();
-
-    // Update local storage
     saveData();
 }
 
@@ -18,8 +46,6 @@ function clearAll() {
         return;
     }
     document.getElementById('healthInfo').innerHTML = '';
-
-    // Update local storage
     localStorage.removeItem('healthData');
 }
 
@@ -35,7 +61,6 @@ function saveData() {
     localStorage.setItem('healthData', JSON.stringify(data));
 }
 
-// On page load, restore data
 function loadData() {
     const storedData = localStorage.getItem('healthData');
     if (storedData) {
@@ -50,9 +75,9 @@ function loadData() {
                     <li><strong class="source">文献出所:</strong> ${entry.source}</li>
                     <li><strong class="content">内容:</strong> ${entry.content}</li>
                 </ul>
-                <button onclick="deleteItem(event)">削除</button>
+                <button onclick="deleteItem(event)" class="delete-button">削除</button>
             `;
-            healthInfoDiv.appendChild(item);
+            healthInfoDiv.prepend(item);
         });
     }
 }
