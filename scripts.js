@@ -35,7 +35,7 @@ function addInfo() {
     document.getElementById('content').value = '';
 }
 
-// 健康情報を削除
+// 個別の文献を削除
 function deleteEntry(button) {
     if (confirmPassword()) {
         const entry = button.parentElement;
