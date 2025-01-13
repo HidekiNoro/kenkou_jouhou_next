@@ -1,65 +1,105 @@
+/* 全体のスタイル */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
 }
 
+/* タイトルのスタイル */
 h1 {
     color: #0078D7;
+    margin-bottom: 20px;
 }
 
-.info {
-    margin: 20px 0;
+/* 文献情報全体のスタイル */
+#healthInfo {
+    width: 80%;
+    margin: 20px auto;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 10px;
 }
 
-.form-group {
-    margin-bottom: 10px;
+/* 個別の文献情報スタイル */
+.health-entry {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
     text-align: left;
-    width: 50%;
+}
+
+/* 削除ボタンのスタイル */
+.health-entry button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.health-entry button:hover {
+    background-color: #c0392b;
+}
+
+/* 全体削除ボタンのスタイル */
+#deleteAllButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    align-self: flex-start;
+}
+
+#deleteAllButton:hover {
+    background-color: #c0392b;
+}
+
+/* 入力フォームのスタイル */
+.form-group {
+    margin-bottom: 15px;
+    width: 80%;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 textarea {
-    width: 100%;
-    padding: 8px;
-    height: 80px;
     resize: none;
-    overflow-y: auto;
+    height: 100px;
 }
 
-.health-info-item {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 60%;
-    text-align: left;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
+/* 追加ボタンのスタイル */
 button {
     background-color: #0078D7;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    border-radius: 5px;
     font-size: 16px;
-    margin-top: 10px;
 }
 
 button:hover {
     background-color: #005A9E;
-}
-
-.delete-button {
-    float: right;
-    background-color: #d9534f;
-}
-
-.delete-button:hover {
-    background-color: #c9302c;
 }
