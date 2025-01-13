@@ -20,7 +20,7 @@ function addInfo() {
         return;
     }
 
-    const healthInfoDiv = document.getElementById('healthInfo');
+    const healthInfoContainer = document.getElementById('healthInfoContainer');
     const newInfo = document.createElement('div');
     newInfo.className = 'health-entry';
     newInfo.innerHTML = `
@@ -31,7 +31,7 @@ function addInfo() {
         </ul>
         <button onclick="deleteEntry(this)">削除</button>
     `;
-    healthInfoDiv.insertBefore(newInfo, healthInfoDiv.firstChild);
+    healthInfoContainer.insertBefore(newInfo, healthInfoContainer.firstChild);
 
     saveHealthInfo();
 
@@ -54,8 +54,8 @@ function deleteEntry(button) {
 
 // データをローカルストレージに保存
 function saveHealthInfo() {
-    const healthInfoDiv = document.getElementById('healthInfo');
-    const entries = healthInfoDiv.getElementsByClassName('health-entry');
+    const healthInfoContainer = document.getElementById('healthInfoContainer');
+    const entries = healthInfoContainer.getElementsByClassName('health-entry');
     const data = Array.from(entries).map(entry => entry.innerHTML);
 
     localStorage.setItem('healthInfo', JSON.stringify(data));
@@ -63,7 +63,7 @@ function saveHealthInfo() {
 
 // ローカルストレージからデータを復元
 function loadHealthInfo() {
-    const healthInfoDiv = document.getElementById('healthInfo');
+    const healthInfoContainer = document.getElementById('healthInfoContainer');
     const data = JSON.parse(localStorage.getItem('healthInfo'));
 
     if (data) {
@@ -71,7 +71,7 @@ function loadHealthInfo() {
             const newInfo = document.createElement('div');
             newInfo.className = 'health-entry';
             newInfo.innerHTML = entryHTML;
-            healthInfoDiv.appendChild(newInfo);
+            healthInfoContainer.appendChild(newInfo);
         });
     }
 }
