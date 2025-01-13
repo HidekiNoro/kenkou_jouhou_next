@@ -1,3 +1,9 @@
+// ページロード時にデータを復元
+window.onload = function () {
+    loadHealthInfo();
+};
+
+// 健康情報を追加
 function addInfo() {
     const title = document.getElementById('title').value;
     const source = document.getElementById('source').value;
@@ -21,31 +27,51 @@ function addInfo() {
     `;
     healthInfoDiv.insertBefore(newInfo, healthInfoDiv.firstChild);
 
+    saveHealthInfo();
+
     // 入力欄をリセット
     document.getElementById('title').value = '';
     document.getElementById('source').value = '';
     document.getElementById('content').value = '';
 }
 
+// 健康情報を削除
 function deleteEntry(button) {
     if (confirmPassword()) {
         const entry = button.parentElement;
         entry.remove();
+        saveHealthInfo();
     } else {
         alert("パスワードが間違っています。");
     }
 }
 
+// データをローカルストレージに保存
+function saveHealthInfo() {
+    const healthInfoDiv = document.getElementById('healthInfo');
+    const entries = healthInfoDiv.getElementsByClassName('health-entry');
+    const data = Array.from(entries).map(entry => entry.innerHTML);
+
+    localStorage.setItem('healthInfo', JSON.stringify(data));
+}
+
+// ローカルストレージからデータを復元
+function loadHealthInfo() {
+    const healthInfoDiv = document.getElementById('healthInfo');
+    const data = JSON.parse(localStorage.getItem('healthInfo'));
+
+    if (data) {
+        data.forEach(entryHTML => {
+            const newInfo = document.createElement('div');
+            newInfo.className = 'health-entry';
+            newInfo.innerHTML = entryHTML;
+            healthInfoDiv.appendChild(newInfo);
+        });
+    }
+}
+
+// パスワード確認
 function confirmPassword() {
     const password = prompt("削除するにはパスワードを入力してください:");
-    return password === "1234"; // パスワードをここで設定
-}
-
-function deleteAllEntries() {
-    if (confirmPassword()) {
-        const healthInfoDiv = document.getElementById('healthInfo');
-        healthInfoDiv.innerHTML = '';
-    } else {
-        alert("パスワードが間違っています。");
-    }
+    return password === "1234";
 }
