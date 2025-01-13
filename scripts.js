@@ -17,6 +17,20 @@ function displayHealthData() {
     healthInfoDiv.innerHTML = ''; // 一度内容をリセット
 
     const data = loadHealthData();
+
+    // 事例説明タイトルを追加
+    const introInfo = document.createElement('div');
+    introInfo.classList.add('health-entry');
+    introInfo.innerHTML = `
+        <ul>
+            <li><strong>タイトル:</strong> サンプルタイトル1</li>
+            <li><strong>文献出所:</strong> サンプル文献1</li>
+            <li><strong>内容:</strong> これはサンプルの内容です。</li>
+        </ul>
+    `;
+    healthInfoDiv.appendChild(introInfo);
+
+    // ユーザーが追加したデータを表示
     data.forEach((item, index) => {
         const newInfo = document.createElement('div');
         newInfo.classList.add('health-entry');
