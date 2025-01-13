@@ -1,89 +1,83 @@
+// ローカルストレージからデータを読み込む
+function loadHealthData() {
+    const storedData = localStorage.getItem('healthData');
+    if (storedData) {
+        return JSON.parse(storedData);
+    }
+    return [];
+}
+
+// ローカルストレージにデータを保存する
+function saveHealthData(data) {
+    localStorage.setItem('healthData', JSON.stringify(data));
+}
+
+function displayHealthData() {
+    const healthInfoDiv = document.getElementById('healthInfo');
+    healthInfoDiv.innerHTML = ''; // 一度内容をリセット
+
+    const data = loadHealthData();
+    data.forEach((item, index) => {
+        const newInfo = document.createElement('div');
+        newInfo.classList.add('health-entry');
+        newInfo.innerHTML = `
+            <ul>
+                <li><strong>タイトル:</strong> ${item.title}</li>
+                <li><strong>文献出所:</strong> ${item.source}</li>
+                <li><strong>内容:</strong> ${item.content}</li>
+            </ul>
+            <button onclick="deleteEntry(${index})">削除</button>
+        `;
+        healthInfoDiv.appendChild(newInfo);
+    });
+}
+
 function addInfo() {
-    const title = document.getElementById('title').value.trim();
-    const source = document.getElementById('source').value.trim();
-    const content = document.getElementById('content').value.trim();
+    const title = document.getElementById('title').value;
+    const source = document.getElementById('source').value;
+    const content = document.getElementById('content').value;
 
     if (!title || !source || !content) {
         alert("全ての項目を入力してください。");
         return;
     }
 
-    const healthInfoDiv = document.getElementById('healthInfo');
-    const newInfo = document.createElement('div');
-    newInfo.className = 'health-info-item';
-    newInfo.innerHTML = `
-        <ul>
-            <li><strong class="title">タイトル:</strong> ${title}</li>
-            <li><strong class="source">文献出所:</strong> ${source}</li>
-            <li><strong class="content">内容:</strong> ${content}</li>
-        </ul>
-        <button onclick="deleteItem(event)" class="delete-button">削除</button>
-    `;
-    healthInfoDiv.prepend(newInfo);
+    const data = loadHealthData();
+    data.unshift({ title, source, content }); // 新しいデータを先頭に追加
+    saveHealthData(data);
 
-    // 保存
-    saveData();
+    displayHealthData();
 
-    // 入力欄リセット
+    // 入力欄をリセット
     document.getElementById('title').value = '';
     document.getElementById('source').value = '';
     document.getElementById('content').value = '';
 }
 
-function deleteItem(event) {
-    const password = prompt("削除するにはパスワードを入力してください:");
-    if (password !== "1234") {
-        alert("パスワードが違います。");
+function deleteEntry(index) {
+    const password = prompt("削除にはパスワードが必要です。パスワードを入力してください：");
+    if (password !== 'secret') {
+        alert('パスワードが間違っています。');
         return;
     }
-    const item = event.target.closest('.health-info-item');
-    item.remove();
-    saveData();
+
+    const data = loadHealthData();
+    data.splice(index, 1); // 指定したデータを削除
+    saveHealthData(data);
+
+    displayHealthData();
 }
 
-function clearAll() {
-    const password = prompt("全て削除するにはパスワードを入力してください:");
-    if (password !== "1234") {
-        alert("パスワードが違います。");
+function deleteAll() {
+    const password = prompt("全体を削除するにはパスワードが必要です。パスワードを入力してください：");
+    if (password !== 'secret') {
+        alert('パスワードが間違っています。');
         return;
     }
-    document.getElementById('healthInfo').innerHTML = '';
-    localStorage.removeItem('healthData');
+
+    localStorage.removeItem('healthData'); // データを削除
+    displayHealthData();
 }
 
-function saveData() {
-    const items = document.querySelectorAll('.health-info-item');
-    const data = [];
-    items.forEach(item => {
-        const title = item.querySelector('.title').textContent.replace('タイトル:', '').trim();
-        const source = item.querySelector('.source').textContent.replace('文献出所:', '').trim();
-        const content = item.querySelector('.content').textContent.replace('内容:', '').trim();
-        data.push({ title, source, content });
-    });
-    localStorage.setItem('healthData', JSON.stringify(data));
-}
-
-function loadData() {
-    const storedData = localStorage.getItem('healthData');
-    if (storedData) {
-        const data = JSON.parse(storedData);
-        const healthInfoDiv = document.getElementById('healthInfo');
-        data.forEach(entry => {
-            const item = document.createElement('div');
-            item.className = 'health-info-item';
-            item.innerHTML = `
-                <ul>
-                    <li><strong class="title">タイトル:</strong> ${entry.title}</li>
-                    <li><strong class="source">文献出所:</strong> ${entry.source}</li>
-                    <li><strong class="content">内容:</strong> ${entry.content}</li>
-                </ul>
-                <button onclick="deleteItem(event)" class="delete-button">削除</button>
-            `;
-            healthInfoDiv.prepend(item);
-        });
-    }
-}
-
-window.onload = loadData;
-
-
+// ページ読み込み時にデータを表示
+window.onload = displayHealthData;
