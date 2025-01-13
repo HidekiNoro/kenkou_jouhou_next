@@ -1,86 +1,89 @@
-window.onload = function () {
-    const container = document.getElementById('healthInfoContainer');
-    if (!container) {
-        console.error("Error: healthInfoContainer element not found.");
-        return;
-    }
-    loadHealthInfo();
-};
+// ローカルストレージからデータを読み込み表示
+function loadHealthInfo() {
+    const storedData = localStorage.getItem("healthInfo");
+    const healthInfoDiv = document.getElementById("healthInfo");
 
+    if (storedData) {
+        const healthData = JSON.parse(storedData);
+        healthData.forEach(item => {
+            const newInfo = document.createElement("div");
+            newInfo.classList.add("info-box");
+            newInfo.innerHTML = `
+                <ul>
+                    <li><strong>タイトル:</strong> ${item.title}</li>
+                    <li><strong>文献出所:</strong> ${item.source}</li>
+                    <li><strong>内容:</strong> ${item.content}</li>
+                </ul>
+                <button class="delete-button">削除</button>
+            `;
+            healthInfoDiv.appendChild(newInfo);
+
+            // 削除ボタンのイベントリスナー
+            const deleteButton = newInfo.querySelector(".delete-button");
+            deleteButton.addEventListener("click", () => {
+                deleteHealthInfo(newInfo, item);
+            });
+        });
+    }
+}
+
+// 文献データの追加
 function addInfo() {
-    const password = prompt("文献を追加するにはパスワードを入力してください:");
-    if (password !== "1234") {
-        alert("パスワードが間違っています。");
-        return;
-    }
-
-    const title = document.getElementById('title').value.trim();
-    const source = document.getElementById('source').value.trim();
-    const content = document.getElementById('content').value.trim();
+    const title = document.getElementById("title").value;
+    const source = document.getElementById("source").value;
+    const content = document.getElementById("content").value;
 
     if (!title || !source || !content) {
         alert("全ての項目を入力してください。");
         return;
     }
 
-    const healthInfoContainer = document.getElementById('healthInfoContainer');
-    if (!healthInfoContainer) {
-        console.error("Error: healthInfoContainer element not found.");
-        return;
-    }
-
-    const newInfo = document.createElement('div');
-    newInfo.className = 'health-entry';
+    const healthInfoDiv = document.getElementById("healthInfo");
+    const newInfo = document.createElement("div");
+    newInfo.classList.add("info-box");
     newInfo.innerHTML = `
         <ul>
             <li><strong>タイトル:</strong> ${title}</li>
             <li><strong>文献出所:</strong> ${source}</li>
             <li><strong>内容:</strong> ${content}</li>
         </ul>
-        <button onclick="deleteEntry(this)">削除</button>
+        <button class="delete-button">削除</button>
     `;
-    healthInfoContainer.insertBefore(newInfo, healthInfoContainer.firstChild);
+    healthInfoDiv.prepend(newInfo);
 
-    saveHealthInfo();
+    // ローカルストレージに保存
+    const storedData = localStorage.getItem("healthInfo");
+    const healthData = storedData ? JSON.parse(storedData) : [];
+    healthData.unshift({ title, source, content });
+    localStorage.setItem("healthInfo", JSON.stringify(healthData));
 
-    document.getElementById('title').value = '';
-    document.getElementById('source').value = '';
-    document.getElementById('content').value = '';
+    // 削除ボタンのイベントリスナー
+    const deleteButton = newInfo.querySelector(".delete-button");
+    deleteButton.addEventListener("click", () => {
+        deleteHealthInfo(newInfo, { title, source, content });
+    });
+
+    // 入力欄をリセット
+    document.getElementById("title").value = '';
+    document.getElementById("source").value = '';
+    document.getElementById("content").value = '';
 }
 
-function deleteEntry(button) {
-    const password = prompt("文献を削除するにはパスワードを入力してください:");
-    if (password !== "1234") {
-        alert("パスワードが間違っています。");
-        return;
-    }
-    const entry = button.parentElement;
-    entry.remove();
-    saveHealthInfo();
+// 文献データの削除
+function deleteHealthInfo(element, item) {
+    const storedData = localStorage.getItem("healthInfo");
+    let healthData = storedData ? JSON.parse(storedData) : [];
+    healthData = healthData.filter(data => 
+        data.title !== item.title || 
+        data.source !== item.source || 
+        data.content !== item.content
+    );
+    localStorage.setItem("healthInfo", JSON.stringify(healthData));
+    element.remove();
 }
 
-function saveHealthInfo() {
-    const healthInfoContainer = document.getElementById('healthInfoContainer');
-    const entries = healthInfoContainer.getElementsByClassName('health-entry');
-    const data = Array.from(entries).map(entry => entry.innerHTML);
-
-    localStorage.setItem('healthInfo', JSON.stringify(data));
-}
-
-function loadHealthInfo() {
-    const healthInfoContainer = document.getElementById('healthInfoContainer');
-    if (!healthInfoContainer) {
-        console.error("Error: healthInfoContainer element not found.");
-        return;
-    }
-
-    const data = JSON.parse(localStorage.getItem('healthInfo'));
-    if (data) {
-        data.forEach(entryHTML => {
-            const newInfo = document.createElement('div');
-            newInfo.className = 'health-entry';
-            newInfo.innerHTML = entryHTML;
-            healthInfoContainer.appendChild(newInfo);
-        });
-    }
-}
+// 初期化
+window.onload = () => {
+    loadHealthInfo();
+    document.getElementById("addButton").addEventListener("click", addInfo);
+};
