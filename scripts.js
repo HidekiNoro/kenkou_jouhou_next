@@ -7,14 +7,18 @@ window.onload = function () {
 function addInfo() {
     // パスワード確認
     const password = prompt("文献を追加するにはパスワードを入力してください:");
+    if (password === null || password.trim() === "") {
+        alert("パスワードが入力されていません。");
+        return;
+    }
     if (password !== "1234") {
         alert("パスワードが間違っています。文献を追加できません。");
         return;
     }
 
-    const title = document.getElementById('title').value;
-    const source = document.getElementById('source').value;
-    const content = document.getElementById('content').value;
+    const title = document.getElementById('title').value.trim();
+    const source = document.getElementById('source').value.trim();
+    const content = document.getElementById('content').value.trim();
 
     if (!title || !source || !content) {
         alert("全ての項目を入力してください。");
@@ -45,6 +49,10 @@ function addInfo() {
 // 個別の文献を削除
 function deleteEntry(button) {
     const password = prompt("文献を削除するにはパスワードを入力してください:");
+    if (password === null || password.trim() === "") {
+        alert("パスワードが入力されていません。");
+        return;
+    }
     if (password !== "1234") {
         alert("パスワードが間違っています。削除できません。");
         return;
