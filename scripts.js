@@ -6,7 +6,8 @@ window.onload = function () {
 // 健康情報を追加
 function addInfo() {
     // パスワード確認
-    if (!confirmPassword()) {
+    const password = prompt("文献を追加するにはパスワードを入力してください:");
+    if (password !== "1234") {
         alert("パスワードが間違っています。文献を追加できません。");
         return;
     }
@@ -43,13 +44,15 @@ function addInfo() {
 
 // 個別の文献を削除
 function deleteEntry(button) {
-    if (confirmPassword()) {
-        const entry = button.parentElement;
-        entry.remove();
-        saveHealthInfo();
-    } else {
+    const password = prompt("文献を削除するにはパスワードを入力してください:");
+    if (password !== "1234") {
         alert("パスワードが間違っています。削除できません。");
+        return;
     }
+
+    const entry = button.parentElement;
+    entry.remove();
+    saveHealthInfo();
 }
 
 // データをローカルストレージに保存
@@ -74,10 +77,4 @@ function loadHealthInfo() {
             healthInfoContainer.appendChild(newInfo);
         });
     }
-}
-
-// パスワード確認
-function confirmPassword() {
-    const password = prompt("操作を実行するにはパスワードを入力してください:");
-    return password === "1234";
 }
