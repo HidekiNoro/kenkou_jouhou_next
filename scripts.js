@@ -5,6 +5,12 @@ window.onload = function () {
 
 // 健康情報を追加
 function addInfo() {
+    // パスワード確認
+    if (!confirmPassword()) {
+        alert("パスワードが間違っています。文献を追加できません。");
+        return;
+    }
+
     const title = document.getElementById('title').value;
     const source = document.getElementById('source').value;
     const content = document.getElementById('content').value;
@@ -42,7 +48,7 @@ function deleteEntry(button) {
         entry.remove();
         saveHealthInfo();
     } else {
-        alert("パスワードが間違っています。");
+        alert("パスワードが間違っています。削除できません。");
     }
 }
 
@@ -72,6 +78,6 @@ function loadHealthInfo() {
 
 // パスワード確認
 function confirmPassword() {
-    const password = prompt("削除するにはパスワードを入力してください:");
+    const password = prompt("操作を実行するにはパスワードを入力してください:");
     return password === "1234";
 }
