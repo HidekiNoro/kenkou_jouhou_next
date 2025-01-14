@@ -14,7 +14,7 @@ function loadHealthInfo() {
     healthInfoDiv.innerHTML = "<h2>健康情報</h2>";
 
     // 保存されているデータを表示
-    storedData.forEach(item => {
+    storedData.forEach((item, index) => {
         const newInfo = document.createElement("div");
         newInfo.classList.add("info-box");
         newInfo.innerHTML = `
@@ -23,7 +23,7 @@ function loadHealthInfo() {
                 <li><strong>文献出所:</strong> ${item.source}</li>
                 <li><strong>内容:</strong> ${item.content}</li>
             </ul>
-            <button class="delete-button" onclick="deleteInfo(this)">削除</button>
+            <button class="delete-button" onclick="deleteInfo(${index})">削除</button>
         `;
         healthInfoDiv.appendChild(newInfo);
     });
@@ -57,20 +57,19 @@ function addInfo() {
     loadHealthInfo();
 }
 
-function deleteInfo(button) {
+function deleteInfo(index) {
     const password = prompt("削除するにはパスワードを入力してください：");
 
     if (password === "1234") {
-        const infoBox = button.parentElement;
-        const title = infoBox.querySelector("li strong").innerText;
         const storedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-        // 該当のタイトルを削除
-        const updatedData = storedData.filter(item => item.title !== title);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedData));
+        // 指定されたインデックスの情報を削除
+        storedData.splice(index, 1);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(storedData));
 
-        // DOMから削除
-        infoBox.remove();
+        // 表示を更新
+        loadHealthInfo();
+
         alert("削除されました。");
     } else {
         alert("パスワードが間違っています。");
