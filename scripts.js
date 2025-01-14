@@ -2,15 +2,15 @@
 const STORAGE_KEY = "healthInfo";
 
 // ページ読み込み時にローカルストレージのデータを表示
-window.onload = function() {
+window.onload = function () {
     loadHealthInfo();
 };
 
 function loadHealthInfo() {
     const storedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
     const healthInfoDiv = document.getElementById("healthInfo");
-    
-    // 既存の情報を一旦クリア
+
+    // 既存の情報をクリア
     healthInfoDiv.innerHTML = "<h2>健康情報</h2>";
 
     // 保存されているデータを表示
@@ -30,9 +30,9 @@ function loadHealthInfo() {
 }
 
 function addInfo() {
-    const title = document.getElementById('title').value;
-    const source = document.getElementById('source').value;
-    const content = document.getElementById('content').value;
+    const title = document.getElementById("title").value;
+    const source = document.getElementById("source").value;
+    const content = document.getElementById("content").value;
 
     if (!title || !source || !content) {
         alert("全ての項目を入力してください。");
@@ -49,9 +49,9 @@ function addInfo() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(storedData));
 
     // 入力欄をリセット
-    document.getElementById('title').value = '';
-    document.getElementById('source').value = '';
-    document.getElementById('content').value = '';
+    document.getElementById("title").value = "";
+    document.getElementById("source").value = "";
+    document.getElementById("content").value = "";
 
     // 表示を更新
     loadHealthInfo();
@@ -65,6 +65,8 @@ function deleteInfo(index) {
 
         // 指定されたインデックスの情報を削除
         storedData.splice(index, 1);
+
+        // ローカルストレージを更新
         localStorage.setItem(STORAGE_KEY, JSON.stringify(storedData));
 
         // 表示を更新
