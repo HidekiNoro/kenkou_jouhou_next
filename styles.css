@@ -1,105 +1,65 @@
-/* 全体のスタイル */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     text-align: center;
 }
 
-/* タイトルのスタイル */
 h1 {
     color: #0078D7;
-    margin-bottom: 20px;
 }
 
-/* 文献情報全体のスタイル */
-#healthInfo {
-    width: 80%;
-    margin: 20px auto;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+h2 {
+    color: #333;
+    margin-top: 40px;
 }
 
-/* 個別の文献情報スタイル */
-.health-entry {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    position: relative;
-    text-align: left;
-}
-
-/* 削除ボタンのスタイル */
-.health-entry button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 3px;
-}
-
-.health-entry button:hover {
-    background-color: #c0392b;
-}
-
-/* 全体削除ボタンのスタイル */
-#deleteAllButton {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
-    align-self: flex-start;
-}
-
-#deleteAllButton:hover {
-    background-color: #c0392b;
-}
-
-/* 入力フォームのスタイル */
 .form-group {
     margin-bottom: 15px;
-    width: 80%;
 }
 
 input, textarea {
-    width: 100%;
-    padding: 8px;
+    width: 50%;
+    padding: 10px;
     margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    font-size: 16px;
 }
 
-textarea {
-    resize: none;
-    height: 100px;
-}
-
-/* 追加ボタンのスタイル */
 button {
     background-color: #0078D7;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px;
     font-size: 16px;
 }
 
 button:hover {
     background-color: #005A9E;
+}
+
+.info-box {
+    border: 1px solid #ddd;
+    margin: 20px auto;
+    padding: 15px;
+    width: 60%;
+    background-color: #f9f9f9;
+    text-align: left;
+    position: relative;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.delete-button:hover {
+    background-color: #d11a2a;
 }
