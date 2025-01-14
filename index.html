@@ -7,29 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>健康情報NEXT</h1>
+    <h1>健康情報NEXTへようこそ</h1>
     <p>このプロジェクトでは、健康に関する情報を整理して共有します。</p>
 
-    <div id="healthInfo" class="info">
+    <div id="healthInfo">
         <h2>健康情報</h2>
     </div>
 
-    <div class="form-container">
-        <div class="form-group">
-            <label for="title">タイトル:</label>
-            <input type="text" id="title" placeholder="タイトルを入力してください">
-        </div>
-        <div class="form-group">
-            <label for="source">文献出所:</label>
-            <input type="text" id="source" placeholder="文献出所を入力してください">
-        </div>
-        <div class="form-group">
-            <label for="content">内容:</label>
-            <textarea id="content" placeholder="内容を入力してください"></textarea>
-        </div>
-        <button id="addButton">文献を追加</button>
+    <div class="form-group">
+        <label for="title">タイトル:</label>
+        <input type="text" id="title" placeholder="タイトルを入力してください">
+    </div>
+    <div class="form-group">
+        <label for="source">文献出所:</label>
+        <input type="text" id="source" placeholder="文献出所を入力してください">
+    </div>
+    <div class="form-group">
+        <label for="content">内容:</label>
+        <textarea id="content" placeholder="内容を入力してください"></textarea>
     </div>
 
-    <script src="scripts.js"></script>
+    <button onclick="addInfo()">健康情報を追加</button>
+
+    <script src="scripts.js" defer></script>
 </body>
 </html>
